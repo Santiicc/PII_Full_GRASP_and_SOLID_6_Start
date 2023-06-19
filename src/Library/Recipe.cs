@@ -16,6 +16,9 @@ namespace Full_GRASP_And_SOLID
 
         public Product FinalProduct { get; set; }
 
+        public bool Cooked {get;private set;} = false;
+
+
         // Agregado por Creator
         public void AddStep(Product input, double quantity, Equipment equipment, int time)
         {
@@ -61,6 +64,39 @@ namespace Full_GRASP_And_SOLID
             }
 
             return result;
+        }
+
+        public int GetCookTime()
+        {
+            int SumTime=0;
+
+            foreach (BaseStep stepaux in steps)
+            {
+                SumTime=SumTime+stepaux.Time;
+            }
+
+            return SumTime;
+        }
+
+        public void SetCooked()
+        {
+            Cooked = true;
+            Console.WriteLine("La receta se ha cocino");
+        }
+
+        public void Cook()
+        {
+            if (Cooked == true )
+            {
+                throw new InvalidOperationException("---Ya está cocinado---");
+            }
+
+            else 
+            {
+                CountdownTimer timer = new CountdownTimer();
+                Itimer timerClient = new Itimer(this);
+                timer.Register(GetCookTime(), timerClient);
+            }
         }
     }
 }
