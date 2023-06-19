@@ -81,7 +81,7 @@ namespace Full_GRASP_And_SOLID
         public void SetCooked()
         {
             Cooked = true;
-            Console.WriteLine("La receta se ha cocino");
+            Console.WriteLine("La receta se cocino");
         }
 
         public void Cook()
